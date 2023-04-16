@@ -12,18 +12,27 @@ public class TestNG {
     WebDriver driver;
     @BeforeMethod
     public void setUp(){
-        WebDriverManager.chromedriver().setup();
-         driver=new ChromeDriver();
+        System.out.println("I am running before every test");
     }
     @AfterMethod
     public void tearDown(){
-        driver.quit();
+        System.out.println("I m running after every test");
 
     }
 
     @Test
     public void test1(){
+        System.out.println("run test1");
+    }
 
+    @Test
+    public void test2(){
+        System.out.println("run test2");
+    }
+
+    @Test
+    public void test3(){
+        System.out.println("run test3");
     }
 
 
