@@ -22,16 +22,19 @@ public class TestNG {
 
     @Test
     public void test1(){
+
         System.out.println("run test1");
     }
 
     @Test
     public void test2(){
+
         System.out.println("run test2");
     }
 
     @Test
     public void test3(){
+
         System.out.println("run test3");
     }
 

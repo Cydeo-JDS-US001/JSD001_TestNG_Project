@@ -1,8 +1,10 @@
 package com.cydeo.tests.day01_TestNG_Dropdowns_JavaFaker;
 
+import com.cydeo.utilities.BrowserUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -11,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class DropDownPractice {
     /*
@@ -40,6 +43,7 @@ public class DropDownPractice {
     Verify title is “Facebook - Log In or Sign Up”  */
 
     WebDriver driver;
+
     @BeforeMethod
     public void setup() {
         //    Open Chrome browser
@@ -50,9 +54,10 @@ public class DropDownPractice {
         //    Go to https://practice.cydeo.com/dropdown
         driver.get("https://practice.cydeo.com/dropdown");
     }
+
     @AfterMethod
-    public void tearDown(){
-        driver.quit();
+    public void tearDown() {
+        //  driver.quit();
 
     }
 
@@ -63,52 +68,53 @@ public class DropDownPractice {
 
         //    Select “December 17th, 1933” and verify it is selected.
         //    Select year using : visible text
-        Select dropDownYear=new Select(driver.findElement(By.xpath("//select[@id='year']")));
+        Select dropDownYear = new Select(driver.findElement(By.xpath("//select[@id='year']")));
+
+
         dropDownYear.selectByVisibleText("1933");
         Thread.sleep(2000);
 
         //    Select month using : value attribute
-        Select dropDownMonth=new Select(driver.findElement(By.xpath("//select[@id='month']")));
+        Select dropDownMonth = new Select(driver.findElement(By.xpath("//select[@id='month']")));
         dropDownMonth.selectByValue("11");
         Thread.sleep(2000);
 
         //    Select day using : index number
-        Select dropDownDay=new Select(driver.findElement(By.xpath("//select[@id='day']")));
+        Select dropDownDay = new Select(driver.findElement(By.xpath("//select[@id='day']")));
         dropDownDay.selectByIndex(16);
         Thread.sleep(2000);
 
-        Assert.assertTrue(dropDownYear.getFirstSelectedOption().getText().equals("1933"),"The selected year is not 1935 so test failed");
-       Assert.assertEquals(dropDownMonth.getFirstSelectedOption().getText(),"December","Selected month was not December so test failed");
-        Assert.assertEquals(dropDownDay.getFirstSelectedOption().getText(),"17");
+        Assert.assertTrue(dropDownYear.getFirstSelectedOption().getText().equals("1930"), "The selected year is not 1930 so test failed");
+        Assert.assertEquals(dropDownMonth.getFirstSelectedOption().getText(), "December", "Selected month was not December so test failed");
+        Assert.assertEquals(dropDownDay.getFirstSelectedOption().getText(), "17");
 
     }
 
     @Test
-    public void selectingState(){
+    public void selectingState() {
         //TC #7: Selecting state from State dropdown and verifying result
         //Open Chrome browser  DONE in before method
         //Go to http://practice.cybertekschool.com/dropdown  DONE in before method
 
         //Select Illinois
+        Select stateSelect = new Select(driver.findElement(By.cssSelector("#state")));
+        stateSelect.selectByValue("IL");
         //Select Virginia
         //Select California
         //Verify final selected option is California.
         //Use all Select options. (visible text, value, index)
 
+
     }
 
+    @Test
+    public void nonSelectDropdown(){
 
+        List<WebElement> links = driver.findElements(By.xpath("//*[@class='dropdown-item']"));
+        driver.findElement(By.cssSelector("#dropdownMenuLink")).click();
+        links.get(5).click();
 
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }
